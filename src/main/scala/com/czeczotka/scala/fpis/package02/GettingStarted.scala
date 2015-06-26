@@ -4,6 +4,7 @@ object GettingStarted {
 
   def main(args: Array[String]) {
     example_241_factorial()
+    exercise21_fibonacci()
   }
 
   def example_241_factorial() {
@@ -12,7 +13,11 @@ object GettingStarted {
     println(s"factorial($num) = ${gs.factorial(num)}")
   }
 
-  def exercise21_fibonacci() = ???
+  def exercise21_fibonacci() {
+    val gs = new GettingStarted
+    val num = 10
+    println(s"fibonacci($num) = ${gs.fibonacci(num)}")
+  }
 }
 
 class GettingStarted {
@@ -26,6 +31,16 @@ class GettingStarted {
     go(n, 1)
   }
 
-  def fib(n: Int): Int = ???
-
+  def fibonacci(num: Int): Int = {
+    @annotation.tailrec
+    def go(counter: Int, end: Int, minusOne: Int, minusTwo: Int): Int = {
+      if (counter == end) minusOne + minusTwo
+      else go(counter + 1, end, minusOne + minusTwo, minusOne)
+    }
+    num match {
+      case _ if num > 1 => go(2, num, 1, 0)
+      case 1 => 1
+      case _ => 0
+    }
+  }
 }

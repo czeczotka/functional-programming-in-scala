@@ -34,12 +34,11 @@ class GettingStarted {
   def fibonacci(num: Int): Int = {
     @annotation.tailrec
     def go(counter: Int, minusOne: Int, minusTwo: Int): Int = {
-      if (counter == num) minusOne + minusTwo
+      if (counter >= num) minusOne + minusTwo
       else go(counter + 1, minusOne + minusTwo, minusOne)
     }
     num match {
-      case _ if num > 1 => go(2, 1, 0)
-      case 1 => 1
+      case _ if num > 0 => go(2, 1, 0)
       case _ => 0
     }
   }

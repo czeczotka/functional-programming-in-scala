@@ -19,8 +19,20 @@ class GettingStartedSpec extends Specification {def is = s2"""
    fibonacci(3)  =  2             ${gs.fibonacci(3)  must be equalTo 2}
    fibonacci(5)  =  5             ${gs.fibonacci(5)  must be equalTo 5}
    fibonacci(7)  =  13            ${gs.fibonacci(7)  must be equalTo 13}
+
+ Function 'isSorted' should return
+   true for an empty array              ${gs.isSorted(emptyArray,    greaterThan) must beTrue}
+   true for a array with one element    ${gs.isSorted(oneElemArray,  greaterThan) must beTrue}
+   true for a sorted array              ${gs.isSorted(sortedArray,   greaterThan) must beTrue}
+   false for an unsorted array          ${gs.isSorted(unsortedArray, greaterThan) must beFalse}
                                  """
 
   val gs = new GettingStarted
+
+  val emptyArray = Array[Int]()
+  val oneElemArray = Array[Int](1)
+  val sortedArray = Array(8, 6, 4, 2, 1)
+  val unsortedArray = Array(4, 2, 6, 8, 1)
+  val greaterThan: (Int, Int) => Boolean = _ > _
 
 }

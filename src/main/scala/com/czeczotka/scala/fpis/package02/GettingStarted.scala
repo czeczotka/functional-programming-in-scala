@@ -9,6 +9,7 @@ object GettingStarted {
     exercise21_fibonacci()
     exercise22_isSorted()
     example26_partial()
+    exercise23_currying()
   }
 
   def example_241_factorial() {
@@ -37,13 +38,21 @@ object GettingStarted {
     println(s"partial1: partial1($myInt, (a: Int, b: Double) => a * b) = f($myDouble) = ${f(myDouble)}")
   }
 
+  def exercise23_currying() {
+    val myInt = 5
+    val myDouble = 2.5
+    val multiplyBy5 = gs.curry[Int, Double, Double]((a: Int, b: Double) => a * b)(myInt)
+    println(s"curry: multiplyBy5($myDouble) = ${multiplyBy5(myDouble)}")
+  }
 }
 
 class GettingStarted {
 
-  def partial1[A,B,C](a: A, f: (A,B) => C): B => C = {
+  def curry[A,B,C](f: (A, B) => C): A => (B => C) =
+    (a: A) => (b: B) => f(a, b)
+
+  def partial1[A,B,C](a: A, f: (A,B) => C): B => C =
     (b: B) => f(a, b)
-  }
 
   def isSorted[A](array: Array[A], ordered: (A,A) => Boolean): Boolean = {
     @annotation.tailrec

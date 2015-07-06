@@ -10,6 +10,7 @@ object GettingStarted {
     exercise22_isSorted()
     example26_partial()
     exercise23_currying()
+    exercise24_uncurry()
   }
 
   def example_241_factorial() {
@@ -39,14 +40,23 @@ object GettingStarted {
   }
 
   def exercise23_currying() {
+    val myDouble = 2.5
+    val multiplyBy5 = gs.curry[Int, Double, Double]((a: Int, b: Double) => a * b)(5)
+    println(s"curry: multiplyBy5($myDouble) = ${multiplyBy5(myDouble)}")
+  }
+
+  def exercise24_uncurry() {
     val myInt = 5
     val myDouble = 2.5
-    val multiplyBy5 = gs.curry[Int, Double, Double]((a: Int, b: Double) => a * b)(myInt)
-    println(s"curry: multiplyBy5($myDouble) = ${multiplyBy5(myDouble)}")
+    val multiply = gs.uncurry[Int, Double, Double]((a: Int) => (b: Double) => a * b)
+    println(s"uncurry: multiply($myInt, $myDouble) = ${multiply(myInt, myDouble)}")
   }
 }
 
 class GettingStarted {
+
+  def uncurry[A,B,C](f: A => B => C): (A, B) => C =
+    (a: A, b: B) => f(a)(b)
 
   def curry[A,B,C](f: (A, B) => C): A => (B => C) =
     (a: A) => (b: B) => f(a, b)

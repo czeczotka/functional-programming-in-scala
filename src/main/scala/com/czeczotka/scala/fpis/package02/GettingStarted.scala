@@ -8,6 +8,7 @@ object GettingStarted {
     example_241_factorial()
     exercise21_fibonacci()
     exercise22_isSorted()
+    example26_partial()
   }
 
   def example_241_factorial() {
@@ -28,9 +29,21 @@ object GettingStarted {
     println(s"isSorted(${sortedArray.toBuffer}) = ${gs.isSorted(sortedArray, (x: Int, y: Int) => x > y)}")
     println(s"isSorted(${unsortedArray.toBuffer}) = ${gs.isSorted(unsortedArray, (x: Int, y: Int) => x > y)}")
   }
+
+  def example26_partial() = {
+    val myInt = 3
+    val myDouble = 2.5
+    val f = gs.partial1[Int, Double, Double](myInt, (a: Int, b: Double) => a * b)
+    println(s"partial1: partial1($myInt, (a: Int, b: Double) => a * b) = f($myDouble) = ${f(myDouble)}")
+  }
+
 }
 
 class GettingStarted {
+
+  def partial1[A,B,C](a: A, f: (A,B) => C): B => C = {
+    (b: B) => f(a, b)
+  }
 
   def isSorted[A](array: Array[A], ordered: (A,A) => Boolean): Boolean = {
     @annotation.tailrec

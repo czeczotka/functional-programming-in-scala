@@ -39,7 +39,7 @@ object List {
     case Cons(head, _tail) => _tail
   }
 
-  def head[A](newHead: A, list: List[A]): List[A] = list match {
+  def setHead[A](newHead: A, list: List[A]): List[A] = list match {
     case Nil => Nil
     case Cons(head, tail) => Cons(newHead, tail)
   }

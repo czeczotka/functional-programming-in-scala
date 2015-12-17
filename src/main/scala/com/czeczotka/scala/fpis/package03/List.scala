@@ -34,6 +34,11 @@ object List {
     else Cons(as.head, apply(as.tail: _*))
   }
 
+  def tail[A](list: List[A]): List[A] = list match {
+    case Nil => Nil
+    case Cons(head, _tail) => _tail
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

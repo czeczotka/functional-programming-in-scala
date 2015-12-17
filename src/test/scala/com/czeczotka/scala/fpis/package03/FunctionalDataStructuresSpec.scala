@@ -1,6 +1,6 @@
 package com.czeczotka.scala.fpis.package03
 
-import com.czeczotka.scala.fpis.package03.List._
+import com.czeczotka.scala.fpis.package03.List.{patternMatched, tail, head}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -15,6 +15,13 @@ class FunctionalDataStructuresSpec extends Specification {
       tail(Cons("hello", Nil)) should equalTo(Nil)
       tail(Cons("hello", Cons("world", Nil))) should equalTo(Cons("world", Nil))
       tail(Cons("hello", Cons("world", Cons("!", Nil)))) should equalTo(Cons("world", Cons("!", Nil)))
+    }
+
+    "exercise 3.3: `setHead` function should replace the first element of a List with a different value" in {
+      head("value", Nil) should equalTo(Nil)
+      head("value", Cons("hello", Nil)) should equalTo(Cons("value", Nil))
+      head("value", Cons("hello", Cons("world", Nil))) should equalTo(Cons("value", Cons("world", Nil)))
+      head("value", Cons("hello", Cons("world", Cons("!", Nil)))) should equalTo(Cons("value", Cons("world", Cons("!", Nil))))
     }
   }
 }

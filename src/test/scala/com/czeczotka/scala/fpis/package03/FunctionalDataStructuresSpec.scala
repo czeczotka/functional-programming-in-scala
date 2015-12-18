@@ -1,6 +1,6 @@
 package com.czeczotka.scala.fpis.package03
 
-import com.czeczotka.scala.fpis.package03.List.{patternMatched, tail, setHead}
+import com.czeczotka.scala.fpis.package03.List.{patternMatched, tail, setHead, drop}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -22,6 +22,15 @@ class FunctionalDataStructuresSpec extends Specification {
       setHead("value", List("hello")) should equalTo(List("value"))
       setHead("value", List("hello", "world")) should equalTo(List("value", "world"))
       setHead("value", List("hello", "world", "!")) should equalTo(List("value", "world", "!"))
+    }
+
+    "exercise 3.4: `drop` function should remove n first elements of a List" in {
+      drop(1, Nil) should equalTo(Nil)
+      drop(1, List("hello")) should equalTo(Nil)
+      drop(2, List("hello", "world")) should equalTo(Nil)
+      drop(2, List("hello", "world", "!")) should equalTo(List("!"))
+      drop(3, List("hello", "world", "!")) should equalTo(Nil)
+      drop(1, Nil) should equalTo(Nil)
     }
   }
 }

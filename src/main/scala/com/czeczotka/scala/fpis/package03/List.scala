@@ -1,5 +1,7 @@
 package com.czeczotka.scala.fpis.package03
 
+import scala.annotation.tailrec
+
 /**
   *
   *   Copied from https://github.com/fpinscala/fpinscala/blob/master/exercises/src/main/scala/fpinscala/datastructures/List.scala
@@ -17,6 +19,7 @@ case class Cons[+A](head: A, tail: List[A]) extends List[A]
 
 
 object List {
+
   def sum(ints: List[Int]): Int = ints match {
     case Nil => 0
     case Cons(x,xs) => x + sum(xs)
@@ -28,7 +31,6 @@ object List {
     case Cons(x,xs) => x * product(xs)
   }
 
-  // Variadic function syntax
   def apply[A](as: A*): List[A] = {
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
@@ -42,6 +44,12 @@ object List {
   def setHead[A](newHead: A, list: List[A]): List[A] = list match {
     case Nil => Nil
     case Cons(head, tail) => Cons(newHead, tail)
+  }
+
+  @tailrec
+  def drop[A](num: Int, list: List[A]): List[A] = num match {
+    case 0 => list
+    case n => drop(n - 1, tail(list))
   }
 
   val patternMatched = List(1,2,3,4,5) match {

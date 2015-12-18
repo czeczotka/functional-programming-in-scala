@@ -52,6 +52,16 @@ object List {
     case n => drop(n - 1, tail(list))
   }
 
+  @tailrec
+  def dropWhile[A](list: List[A], f: A => Boolean): List[A] = list match {
+    case Nil => Nil
+    case Cons(head, tail) => f(head) match {
+      case true => dropWhile(tail, f)
+      case false => Cons(head, tail)
+    }
+  }
+
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

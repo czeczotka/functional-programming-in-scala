@@ -1,6 +1,6 @@
 package com.czeczotka.scala.fpis.chapter03
 
-import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile}
+import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, init}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -43,6 +43,13 @@ class FunctionalDataStructuresSpec extends Specification {
       dropWhile(List("hello", "world", "!"), (s: String) => s.length > 1) should equalTo(List("!"))
       dropWhile(List("hello", "world", "!"), (s: String) => s.length > 0) should equalTo(Nil)
       dropWhile(List(1, 2, 3, 4, 5), (i: Int) => i < 4) should equalTo(List(4, 5))
+    }
+
+    "exercise 3.6: `init` function should return all but the last element of a List" in {
+      init(Nil) should equalTo(Nil)
+      init(List("hello")) should equalTo(Nil)
+      init(List("hello", "world")) should equalTo(List("hello"))
+      init(List("hello", "world", "!")) should equalTo(List("hello", "world"))
     }
   }
 }

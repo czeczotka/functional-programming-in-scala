@@ -61,6 +61,11 @@ object List {
     }
   }
 
+  def init[A](list: List[A]): List[A] = list match {
+    case Nil => Nil
+    case Cons(head, Nil) => Nil
+    case Cons(head, tail) => Cons(head, init(tail))
+  }
 
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x

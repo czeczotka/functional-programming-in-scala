@@ -1,4 +1,4 @@
-package com.czeczotka.scala.fpis.package03
+package com.czeczotka.scala.fpis.chapter03
 
 import scala.annotation.tailrec
 

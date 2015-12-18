@@ -1,6 +1,6 @@
-package com.czeczotka.scala.fpis.package03
+package com.czeczotka.scala.fpis.chapter03
 
-import com.czeczotka.scala.fpis.package03.List.{patternMatched, tail, setHead, drop, dropWhile}
+import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {

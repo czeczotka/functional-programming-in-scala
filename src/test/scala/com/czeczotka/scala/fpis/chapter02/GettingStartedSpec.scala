@@ -1,4 +1,4 @@
-package com.czeczotka.scala.fpis.package02
+package com.czeczotka.scala.fpis.chapter02
 
 import org.specs2.Specification
 

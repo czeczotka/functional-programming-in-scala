@@ -1,6 +1,6 @@
 package com.czeczotka.scala.fpis.chapter03
 
-import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, init}
+import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry, init}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -43,6 +43,14 @@ class FunctionalDataStructuresSpec extends Specification {
       dropWhile(List("hello", "world", "!"), (s: String) => s.length > 1) should equalTo(List("!"))
       dropWhile(List("hello", "world", "!"), (s: String) => s.length > 0) should equalTo(Nil)
       dropWhile(List(1, 2, 3, 4, 5), (i: Int) => i < 4) should equalTo(List(4, 5))
+    }
+
+    "example 3.3.2: `dropWhileWithCurry` function should remove elements from the List prefix as long as they match a predicate" in {
+      val f1 = dropWhileWithCurry(List("hello")) _
+      f1(s => !s.isEmpty) should equalTo(Nil)
+
+      val f2 = dropWhileWithCurry(List(1, 2, 3, 4, 5)) _
+      f2(i => i < 4) should equalTo(List(4, 5))
     }
 
     "exercise 3.6: `init` function should return all but the last element of a List" in {

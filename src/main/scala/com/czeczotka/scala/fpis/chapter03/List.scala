@@ -4,7 +4,8 @@ import scala.annotation.tailrec
 
 /**
   *
-  *   Copied from https://github.com/fpinscala/fpinscala/blob/master/exercises/src/main/scala/fpinscala/datastructures/List.scala
+  *   List definition copied from
+  *   https://github.com/fpinscala/fpinscala/blob/master/exercises/src/main/scala/fpinscala/datastructures/List.scala
   *
   */
 
@@ -57,6 +58,15 @@ object List {
     case Nil => Nil
     case Cons(head, tail) => f(head) match {
       case true => dropWhile(tail, f)
+      case false => Cons(head, tail)
+    }
+  }
+
+  @tailrec
+  def dropWhileWithCurry[A](list: List[A])(f: A => Boolean): List[A] = list match {
+    case Nil => Nil
+    case Cons(head, tail) => f(head) match {
+      case true => dropWhileWithCurry(tail)(f)
       case false => Cons(head, tail)
     }
   }

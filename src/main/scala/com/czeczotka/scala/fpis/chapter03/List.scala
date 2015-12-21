@@ -77,6 +77,29 @@ object List {
     case Cons(head, tail) => Cons(head, init(tail))
   }
 
+  def foldRight[A,B](list: List[A], z: B)(f: (A, B) => B): B = {
+    list match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+    }
+  }
+
+  def sum2(list: List[Int]): Int = {
+    foldRight(list, 0)((a, b) => a + b)
+  }
+
+  def product2(list: List[Double]): Double = {
+    foldRight(list, 1.0)((a, b) => a * b)
+  }
+
+  def product3(list: List[Double]): Double = {
+    val func = (first: Double, second: Double) => (first, second) match {
+      case (a, b) if a == 0 || b == 0 => 0
+      case (a, b) => a * b
+    }
+    foldRight(list, 1.0)(func)
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

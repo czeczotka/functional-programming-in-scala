@@ -1,6 +1,6 @@
 package com.czeczotka.scala.fpis.chapter03
 
-import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry, init}
+import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry, init, product3}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -58,6 +58,14 @@ class FunctionalDataStructuresSpec extends Specification {
       init(List("hello")) should equalTo(Nil)
       init(List("hello", "world")) should equalTo(List("hello"))
       init(List("hello", "world", "!")) should equalTo(List("hello", "world"))
+    }
+
+    // looking at the stack I don't think it's possible as the curried function
+    // is not evaluated until all recursive foldRight calls are executed
+    "exercise 3.7: `product2` should use `foldRight` to calculate product" in {
+      product3(List(2, 1.5)) should equalTo(3)
+      product3(List(2, 0)) should equalTo(0)
+      product3(List(2, 0, 3, 4, 5)) should equalTo(0)
     }
   }
 }

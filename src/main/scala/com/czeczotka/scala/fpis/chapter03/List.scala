@@ -100,6 +100,8 @@ object List {
     foldRight(list, 1.0)(func)
   }
 
+  def length[A](list: List[A]): Int = foldRight(list, 0)((a, b) => 1 + b)
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

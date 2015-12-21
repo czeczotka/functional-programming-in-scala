@@ -1,6 +1,7 @@
 package com.czeczotka.scala.fpis.chapter03
 
-import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry, init, product3}
+import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
+import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, length}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -66,6 +67,27 @@ class FunctionalDataStructuresSpec extends Specification {
       product3(List(2, 1.5)) should equalTo(3)
       product3(List(2, 0)) should equalTo(0)
       product3(List(2, 0, 3, 4, 5)) should equalTo(0)
+    }
+
+    "exercise 3.8: pass Nil and Cons to foldRight" in {
+      println("exercise 3.8: foldRight(List(1, 2, 3), Nil:List[Int])(Cons(_,_)) = " + foldRight(List(1, 2, 3), Nil:List[Int])(Cons(_,_)))
+
+      //   see the trace of subsequent calls - we ended up with list we had in the beginning
+      //      foldRight(List(1, 2, 3), Nil:List[Int])(Cons(_,_))
+      //      Cons(1, foldRight(List(2, 3), Nil:List[Int])(Cons(_,_)))
+      //      Cons(1, Cons(2, foldRight(List(3), Nil:List[Int])(Cons(_,_))))
+      //      Cons(1, Cons(2, Cons(3, foldRight(Nil, Nil:List[Int])(Cons(_,_)))))
+      //      Cons(1, Cons(2, Cons(3, Nil)))
+
+      true should beTrue
+    }
+
+    "exercise 3.9: `length` should return the number of elements in a List" in {
+      List.length(Nil) should equalTo(0)
+      List.length(List(5)) should equalTo(1)
+      List.length(List(5, 6)) should equalTo(2)
+      List.length(List(1, 2, 3, 4, 5)) should equalTo(5)
+      List.length(List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) should equalTo(10)
     }
   }
 }

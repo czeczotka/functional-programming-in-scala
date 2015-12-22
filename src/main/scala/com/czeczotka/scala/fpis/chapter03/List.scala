@@ -126,6 +126,11 @@ object List {
 
   def append[A](l1: List[A], l2: List[A]): List[A] = foldRight(l1, l2)((a, b) => Cons(a, b))
 
+  def addOne(list: List[Int]): List[Int] = list match {
+    case Nil => Nil
+    case Cons(head, tail) => Cons(head + 1, addOne(tail))
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

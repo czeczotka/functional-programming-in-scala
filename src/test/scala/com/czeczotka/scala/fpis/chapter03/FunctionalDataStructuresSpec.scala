@@ -2,7 +2,7 @@ package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
 import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
-import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append}
+import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -131,6 +131,13 @@ class FunctionalDataStructuresSpec extends Specification {
       append(List(5), Nil) should equalTo(List(5))
       append(List(5), List(6)) should equalTo(List(5, 6))
       append(List(1, 2, 3), List(4, 5)) should equalTo(List(1, 2, 3, 4, 5))
+    }
+
+    "exercise 3.16: `addOne` should add 1 to each element of a List[Int]" in {
+      addOne(Nil) should equalTo(Nil)
+      addOne(List(1)) should equalTo(List(2))
+      addOne(List(5, 6)) should equalTo(List(6, 7))
+      addOne(List(1, 2, 3, 4, 5)) should equalTo(List(2, 3, 4, 5, 6))
     }
   }
 }

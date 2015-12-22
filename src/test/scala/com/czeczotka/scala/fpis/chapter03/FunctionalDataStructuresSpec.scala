@@ -2,7 +2,7 @@ package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
 import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
-import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse}
+import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -124,6 +124,13 @@ class FunctionalDataStructuresSpec extends Specification {
       reverse(List(5)) should equalTo(List(5))
       reverse(List(5, 6)) should equalTo(List(6, 5))
       reverse(List(1, 2, 3, 4, 5)) should equalTo(List(5, 4, 3, 2, 1))
+    }
+
+    "exercise 3.14: `append` should append another list to a List" in {
+      append(Nil, List(1)) should equalTo(List(1))
+      append(List(5), Nil) should equalTo(List(5))
+      append(List(5), List(6)) should equalTo(List(5, 6))
+      append(List(1, 2, 3), List(4, 5)) should equalTo(List(1, 2, 3, 4, 5))
     }
   }
 }

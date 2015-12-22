@@ -124,6 +124,8 @@ object List {
 
   def reverse[A](list: List[A]): List[A] = foldLeft(list, List[A]())((a, b) => Cons(b, a))
 
+  def append[A](l1: List[A], l2: List[A]): List[A] = foldRight(l1, l2)((a, b) => Cons(a, b))
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

@@ -77,13 +77,6 @@ object List {
     case Cons(head, tail) => Cons(head, init(tail))
   }
 
-  def foldRight[A,B](list: List[A], z: B)(f: (A, B) => B): B = {
-    list match {
-      case Nil => z
-      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
-    }
-  }
-
   def sum2(list: List[Int]): Int = {
     foldRight(list, 0)((a, b) => a + b)
   }
@@ -102,12 +95,31 @@ object List {
 
   def length[A](list: List[A]): Int = foldRight(list, 0)((a, b) => 1 + b)
 
+  def foldRight[A,B](list: List[A], z: B)(f: (A, B) => B): B = {
+    list match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z)(f))
+    }
+  }
+
   @tailrec
   def foldLeft[A,B](list: List[A], z: B)(f: (B, A) => B): B = {
     list match {
       case Nil => z
       case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
     }
+  }
+
+  def sumFoldLeft(list: List[Double]): Double = {
+    foldLeft(list, 0d)(_ + _)
+  }
+
+  def productFoldLeft(list: List[Double]): Double = {
+    foldLeft(list, 1d)(_ * _)
+  }
+
+  def lengthFoldLeft(list: List[Double]): Int = {
+    foldLeft(list, 0)((a, b) => 1 + a.toInt)
   }
 
   val patternMatched = List(1,2,3,4,5) match {

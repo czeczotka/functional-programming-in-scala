@@ -1,7 +1,7 @@
 package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
-import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft}
+import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft, lengthFoldLeft}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -95,6 +95,27 @@ class FunctionalDataStructuresSpec extends Specification {
         foldLeft(list, 0)((a, b) => a + b)
       }
       sum(List(1, 2, 3, 4, 5)) should equalTo(15)
+    }
+
+    "exercise 3.11: `sumFoldLeft` should return the sum of elements in a List" in {
+      sumFoldLeft(Nil) should equalTo(0)
+      sumFoldLeft(List(2, 1.5)) should equalTo(3.5)
+      sumFoldLeft(List(2, 0, -2)) should equalTo(0)
+      sumFoldLeft(List(2, 0, 3, 4, 5)) should equalTo(14)
+    }
+
+    "exercise 3.11: `productFoldLeft` should return the product of elements in a List" in {
+      productFoldLeft(List(2, 1.5)) should equalTo(3)
+      productFoldLeft(List(2, 0)) should equalTo(0)
+      productFoldLeft(List(2, 0, 3, 4, 5)) should equalTo(0)
+    }
+
+    "exercise 3.11: `lengthFoldLeft` should return the length of a List" in {
+      lengthFoldLeft(Nil) should equalTo(0)
+      lengthFoldLeft(List(5)) should equalTo(1)
+      lengthFoldLeft(List(5, 6)) should equalTo(2)
+      lengthFoldLeft(List(1, 2, 3, 4, 5)) should equalTo(5)
+      lengthFoldLeft(List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) should equalTo(10)
     }
   }
 }

@@ -1,7 +1,7 @@
 package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
-import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, length}
+import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -88,6 +88,13 @@ class FunctionalDataStructuresSpec extends Specification {
       List.length(List(5, 6)) should equalTo(2)
       List.length(List(1, 2, 3, 4, 5)) should equalTo(5)
       List.length(List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) should equalTo(10)
+    }
+
+    "exercise 3.10: `foldLeft` should be tail recursive" in {
+      def sum(list: List[Int]): Int = {
+        foldLeft(list, 0)((a, b) => a + b)
+      }
+      sum(List(1, 2, 3, 4, 5)) should equalTo(15)
     }
   }
 }

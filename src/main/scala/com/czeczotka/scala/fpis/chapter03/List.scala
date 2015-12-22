@@ -102,6 +102,14 @@ object List {
 
   def length[A](list: List[A]): Int = foldRight(list, 0)((a, b) => 1 + b)
 
+  @tailrec
+  def foldLeft[A,B](list: List[A], z: B)(f: (B, A) => B): B = {
+    list match {
+      case Nil => z
+      case Cons(x, xs) => foldLeft(xs, f(z, x))(f)
+    }
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

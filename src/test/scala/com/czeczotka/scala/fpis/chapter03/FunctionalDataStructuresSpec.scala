@@ -1,7 +1,8 @@
 package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
-import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft, lengthFoldLeft}
+import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
+import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -116,6 +117,13 @@ class FunctionalDataStructuresSpec extends Specification {
       lengthFoldLeft(List(5, 6)) should equalTo(2)
       lengthFoldLeft(List(1, 2, 3, 4, 5)) should equalTo(5)
       lengthFoldLeft(List(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)) should equalTo(10)
+    }
+
+    "exercise 3.12: `reverse` should reverse a List" in {
+      reverse(Nil) should equalTo(Nil)
+      reverse(List(5)) should equalTo(List(5))
+      reverse(List(5, 6)) should equalTo(List(6, 5))
+      reverse(List(1, 2, 3, 4, 5)) should equalTo(List(5, 4, 3, 2, 1))
     }
   }
 }

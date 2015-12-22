@@ -119,8 +119,10 @@ object List {
   }
 
   def lengthFoldLeft(list: List[Double]): Int = {
-    foldLeft(list, 0)((a, b) => 1 + a.toInt)
+    foldLeft(list, 0)((a, b) => 1 + a)
   }
+
+  def reverse[A](list: List[A]): List[A] = foldLeft(list, List[A]())((a, b) => Cons(b, a))
 
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x

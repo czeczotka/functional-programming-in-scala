@@ -2,11 +2,7 @@ package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
 import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
-<<<<<<< HEAD
 import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String}
-=======
-import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne}
->>>>>>> 827ffdefbae4e9f38bf0cca0ab3b6f33a9cf2d48
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {

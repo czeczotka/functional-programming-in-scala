@@ -2,7 +2,8 @@ package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
 import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
-import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String, filter, flatMap}
+import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String, filter}
+import com.czeczotka.scala.fpis.chapter03.List.{flatMap, flatMapFilter}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -165,6 +166,12 @@ class FunctionalDataStructuresSpec extends Specification {
       flatMap(List(1, 2, 3))(_ => List(true)) should equalTo(List(true, true, true))
       flatMap(List(1, 2, 3))(i => List(i, i)) should equalTo(List(1, 1, 2, 2, 3, 3))
       flatMap(List(1, 2, 3))(i => List(i, i * i)) should equalTo(List(1, 1, 2, 4, 3, 9))
+    }
+
+    "exercise 3.21: `flatMapFilter` should remove an element from a List if it does not satisfy a predicate" in {
+      flatMapFilter(Nil)(_ => true) should equalTo(Nil)
+      flatMapFilter(List(1))(_ => true) should equalTo(List(1))
+      flatMapFilter(List(1, 2, 4, 5, 7, 8))((i: Int) => i % 2 == 0) should equalTo(List(2, 4, 8))
     }
   }
 }

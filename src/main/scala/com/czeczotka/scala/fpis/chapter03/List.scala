@@ -152,6 +152,11 @@ object List {
     foldRight(list, List[B]())(g)
   }
 
+  def flatMapFilter[A](list: List[A])(predicate: (A) => Boolean): List[A] = {
+    val f: (A) => List[A] = (a: A) => if (predicate(a)) List(a) else Nil
+    flatMap(list)(f)
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

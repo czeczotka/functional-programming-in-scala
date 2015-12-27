@@ -2,7 +2,7 @@ package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
 import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
-import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String, filter}
+import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String, filter, flatMap}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -146,7 +146,7 @@ class FunctionalDataStructuresSpec extends Specification {
       double2String(List(5.1, 6.2)) should equalTo(List("5.1", "6.2"))
     }
 
-    "exercise 3:18: `map` should modify each element of a List in a generic way" in {
+    "exercise 3.18: `map` should modify each element of a List in a generic way" in {
       List.map(Nil)(_ => true) should equalTo(Nil)
       List.map(List(1))(_ => true) should equalTo(List(true))
       List.map(List(1))((i: Int) => i > 0) should equalTo(List(true))
@@ -154,10 +154,17 @@ class FunctionalDataStructuresSpec extends Specification {
       List.map(List(1, 2, 4, 8))((i: Int) => (i * i).toString) should equalTo(List("1", "4", "16", "64"))
     }
 
-    "exercise 3:19: `filter` should remove an element from a List if it does not satisfy a predicate" in {
+    "exercise 3.19: `filter` should remove an element from a List if it does not satisfy a predicate" in {
       filter(Nil)(_ => true) should equalTo(Nil)
       filter(List(1))(_ => true) should equalTo(List(1))
       filter(List(1, 2, 4, 5, 7, 8))((i: Int) => i % 2 == 0) should equalTo(List(2, 4, 8))
+    }
+
+    "exercise 3.20: `flatMap` should flatten map operation which returns a list instead of a single element" in {
+      flatMap(Nil)(_ => List(true)) should equalTo(Nil)
+      flatMap(List(1, 2, 3))(_ => List(true)) should equalTo(List(true, true, true))
+      flatMap(List(1, 2, 3))(i => List(i, i)) should equalTo(List(1, 1, 2, 2, 3, 3))
+      flatMap(List(1, 2, 3))(i => List(i, i * i)) should equalTo(List(1, 1, 2, 4, 3, 9))
     }
   }
 }

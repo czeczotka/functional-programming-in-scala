@@ -147,6 +147,11 @@ object List {
     foldRight(list, List[A]())(f)
   }
 
+  def flatMap[A, B](list: List[A])(f: A => List[B]): List[B] = {
+    val g: (A, List[B]) => List[B] = (a: A, b: List[B]) => append(f(a), b)
+    foldRight(list, List[B]())(g)
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

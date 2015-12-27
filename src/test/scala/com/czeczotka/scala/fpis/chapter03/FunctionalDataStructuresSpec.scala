@@ -2,7 +2,7 @@ package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
 import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
-import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String}
+import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String, filter}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -152,6 +152,12 @@ class FunctionalDataStructuresSpec extends Specification {
       List.map(List(1))((i: Int) => i > 0) should equalTo(List(true))
       List.map(List(1))((i: Int) => i <= 0) should equalTo(List(false))
       List.map(List(1, 2, 4, 8))((i: Int) => (i * i).toString) should equalTo(List("1", "4", "16", "64"))
+    }
+
+    "exercise 3:19: `filter` should remove an element from a List if it does not satisfy a predicate" in {
+      filter(Nil)(_ => true) should equalTo(Nil)
+      filter(List(1))(_ => true) should equalTo(List(1))
+      filter(List(1, 2, 4, 5, 7, 8))((i: Int) => i % 2 == 0) should equalTo(List(2, 4, 8))
     }
   }
 }

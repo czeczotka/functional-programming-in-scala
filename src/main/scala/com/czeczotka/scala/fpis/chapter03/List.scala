@@ -142,6 +142,11 @@ object List {
 
   def map[A, B](list: List[A])(f: (A) => B): List[B] = foldRight(list, List[B]())((a, b) => Cons(f(a), b))
 
+  def filter[A](list: List[A])(predicate: (A) => Boolean): List[A] = {
+    val f: (A, List[A]) => List[A] = (a: A, l: List[A]) => if (predicate(a)) Cons(a, l) else l
+    foldRight(list, List[A]())(f)
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

@@ -145,5 +145,13 @@ class FunctionalDataStructuresSpec extends Specification {
       double2String(List(1.0)) should equalTo(List("1.0"))
       double2String(List(5.1, 6.2)) should equalTo(List("5.1", "6.2"))
     }
+
+    "exercise 3:18: `map` should modify each element of a List in a generic way" in {
+      List.map(Nil)(_ => true) should equalTo(Nil)
+      List.map(List(1))(_ => true) should equalTo(List(true))
+      List.map(List(1))((i: Int) => i > 0) should equalTo(List(true))
+      List.map(List(1))((i: Int) => i <= 0) should equalTo(List(false))
+      List.map(List(1, 2, 4, 8))((i: Int) => (i * i).toString) should equalTo(List("1", "4", "16", "64"))
+    }
   }
 }

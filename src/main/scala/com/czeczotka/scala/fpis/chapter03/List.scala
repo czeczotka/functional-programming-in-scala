@@ -140,6 +140,8 @@ object List {
 //    case Cons(head, tail) => Cons(head.toString, double2String(tail))
 //  }
 
+  def map[A, B](list: List[A])(f: (A) => B): List[B] = foldRight(list, List[B]())((a, b) => Cons(f(a), b))
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

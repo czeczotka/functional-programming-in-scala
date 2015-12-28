@@ -163,6 +163,12 @@ object List {
     case (Cons(h1, t1), Cons(h2, t2)) => Cons(h1+h2, addLists(t1, t2))
   }
 
+  def zipWith[A, B](list1: List[A], list2: List[A])(f: (A, A) => A): List[A] = (list1, list2) match {
+    case (Nil, l) => l
+    case (l, Nil) => l
+    case (Cons(h1, t1), Cons(h2, t2)) => Cons(f(h1, h2), zipWith(t1, t2)(f))
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

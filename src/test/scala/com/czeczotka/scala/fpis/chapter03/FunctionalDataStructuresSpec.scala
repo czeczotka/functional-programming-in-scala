@@ -3,7 +3,7 @@ package com.czeczotka.scala.fpis.chapter03
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
 import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
 import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String, filter}
-import com.czeczotka.scala.fpis.chapter03.List.{flatMap, flatMapFilter, addLists}
+import com.czeczotka.scala.fpis.chapter03.List.{flatMap, flatMapFilter, addLists, zipWith}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -180,6 +180,14 @@ class FunctionalDataStructuresSpec extends Specification {
       addLists(Nil, List(1, 2, 3)) should equalTo(List(1, 2, 3))
       addLists(List(1), List(5, 6, 7)) should equalTo(List(6, 6 ,7))
       addLists(List(-1, -4, -8), List(5, 6, 7)) should equalTo(List(4, 2, -1))
-    }   
+    }
+
+    "exercise 3.23: `zipWith` should take two lists and construct a new list using a function to combine elements" in {
+      zipWith(Nil, Nil)((a: Any, b: Any) => 1) should equalTo(Nil)
+      zipWith(List(1, 2, 3), Nil)((_, _) => 1) should equalTo(List(1, 2, 3))
+      zipWith(Nil, List(1, 2, 3))((_, _) => 1) should equalTo(List(1, 2, 3))
+      zipWith(List(1), List(5, 6, 7))((a, b) => a + b) should equalTo(List(6, 6 ,7))
+      zipWith(List(-1.1, -4.0, -9.0), List(5.0, 6.0, 7.0))((a, b) => a * b) should equalTo(List(-5.5, -24, -63))
+    }
   }
 }

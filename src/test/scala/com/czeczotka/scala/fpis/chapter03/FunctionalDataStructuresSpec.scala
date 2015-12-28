@@ -3,7 +3,7 @@ package com.czeczotka.scala.fpis.chapter03
 import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
 import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
 import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String, filter}
-import com.czeczotka.scala.fpis.chapter03.List.{flatMap, flatMapFilter}
+import com.czeczotka.scala.fpis.chapter03.List.{flatMap, flatMapFilter, addLists}
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -173,5 +173,13 @@ class FunctionalDataStructuresSpec extends Specification {
       flatMapFilter(List(1))(_ => true) should equalTo(List(1))
       flatMapFilter(List(1, 2, 4, 5, 7, 8))((i: Int) => i % 2 == 0) should equalTo(List(2, 4, 8))
     }
+
+    "exercise 3.22: `addList` should take two lists and construct a new list by adding corresponding elements" in {
+      addLists(Nil, Nil) should equalTo(Nil)
+      addLists(List(1, 2, 3), Nil) should equalTo(List(1, 2, 3))
+      addLists(Nil, List(1, 2, 3)) should equalTo(List(1, 2, 3))
+      addLists(List(1), List(5, 6, 7)) should equalTo(List(6, 6 ,7))
+      addLists(List(-1, -4, -8), List(5, 6, 7)) should equalTo(List(4, 2, -1))
+    }   
   }
 }

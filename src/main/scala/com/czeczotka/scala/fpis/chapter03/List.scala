@@ -157,6 +157,12 @@ object List {
     flatMap(list)(f)
   }
 
+  def addLists(list1: List[Int], list2: List[Int]): List[Int] = (list1, list2) match {
+    case (Nil, l) => l
+    case (l, Nil) => l
+    case (Cons(h1, t1), Cons(h2, t2)) => Cons(h1+h2, addLists(t1, t2))
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

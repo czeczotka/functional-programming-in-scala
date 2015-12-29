@@ -169,6 +169,20 @@ object List {
     case (Cons(h1, t1), Cons(h2, t2)) => Cons(f(h1, h2), zipWith(t1, t2)(f))
   }
 
+  @tailrec
+  def hasSubsequence[A](list: List[A], sub: List[A]): Boolean = list match {
+    case Nil => sub == Nil
+    case _ if checkSubsequence(list, sub) => true
+    case Cons(_, t) => hasSubsequence(t, sub)
+  }
+
+  @tailrec
+  private def checkSubsequence[A](list: List[A], sub: List[A]): Boolean = (list, sub) match {
+    case (_, Nil) => true
+    case (Cons(h, t), Cons(sh, st)) if h == sh => checkSubsequence(t, st)
+    case _ => false
+  }
+
   val patternMatched = List(1,2,3,4,5) match {
     case Cons(x, Cons(2, Cons(4, _))) => x
     case Nil => 42

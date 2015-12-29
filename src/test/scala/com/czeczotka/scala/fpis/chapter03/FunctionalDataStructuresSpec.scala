@@ -1,9 +1,6 @@
 package com.czeczotka.scala.fpis.chapter03
 
-import com.czeczotka.scala.fpis.chapter03.List.{patternMatched, tail, setHead, drop, dropWhile, dropWhileWithCurry}
-import com.czeczotka.scala.fpis.chapter03.List.{init, foldRight, product3, foldLeft, sumFoldLeft, productFoldLeft}
-import com.czeczotka.scala.fpis.chapter03.List.{lengthFoldLeft, reverse, append, addOne, double2String, filter}
-import com.czeczotka.scala.fpis.chapter03.List.{flatMap, flatMapFilter, addLists, zipWith}
+import com.czeczotka.scala.fpis.chapter03.List._
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -188,6 +185,16 @@ class FunctionalDataStructuresSpec extends Specification {
       zipWith(Nil, List(1, 2, 3))((_, _) => 1) should equalTo(List(1, 2, 3))
       zipWith(List(1), List(5, 6, 7))((a, b) => a + b) should equalTo(List(6, 6 ,7))
       zipWith(List(-1.1, -4.0, -9.0), List(5.0, 6.0, 7.0))((a, b) => a * b) should equalTo(List(-5.5, -24, -63))
+    }
+
+    "exercise 3.24: `hasSubsequence` checks whether a list constains another list as a subsequence" in {
+      hasSubsequence(Nil, List(1, 2, 3)) should equalTo(false)
+      hasSubsequence(List(1, 2, 3, 4), Nil) should equalTo(true)
+      hasSubsequence(List(1, 2, 3, 4), List(4, 5)) should equalTo(false)
+      hasSubsequence(List(1, 2, 3, 4), List(2, 3)) should equalTo(true)
+      hasSubsequence(List(1, 2, 3, 4), List(1, 3)) should equalTo(false)
+      hasSubsequence(List(1, 2, 3, 4), List(1, 2, 3, 4)) should equalTo(true)
+      hasSubsequence(List(1, 2, 3, 4), List(1, 2)) should equalTo(true)
     }
   }
 }

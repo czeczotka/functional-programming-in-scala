@@ -1,6 +1,7 @@
 package com.czeczotka.scala.fpis.chapter03
 
 import com.czeczotka.scala.fpis.chapter03.List._
+import com.czeczotka.scala.fpis.chapter03.Tree._
 import org.specs2.mutable.Specification
 
 class FunctionalDataStructuresSpec extends Specification {
@@ -195,6 +196,13 @@ class FunctionalDataStructuresSpec extends Specification {
       hasSubsequence(List(1, 2, 3, 4), List(1, 3)) should equalTo(false)
       hasSubsequence(List(1, 2, 3, 4), List(1, 2, 3, 4)) should equalTo(true)
       hasSubsequence(List(1, 2, 3, 4), List(1, 2)) should equalTo(true)
+    }
+
+    "exercise 3.25: `size` counts the number of nodes in a Tree" in {
+      Tree.size(Leaf(123)) should equalTo(1)
+      Tree.size(Branch(Leaf(123), Leaf(321))) should equalTo(3)
+      Tree.size(Branch(Branch(Leaf("a"), Leaf("b")), Leaf("c"))) should equalTo(5)
+      Tree.size(Branch(Branch(Leaf("a"), Leaf("b")), Branch(Leaf("c"), Leaf("d")))) should equalTo(7)
     }
   }
 }

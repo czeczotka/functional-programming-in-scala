@@ -216,5 +216,10 @@ class FunctionalDataStructuresSpec extends Specification {
       Tree.depth(Branch(Leaf(123), Leaf(321))) should equalTo(2)
       Tree.depth(Branch(Branch(Leaf(-5), Leaf(-1)), Branch(Leaf(7), Leaf(3)))) should equalTo(3)
     }
+
+    "exercise 3.28: `map` should modify each element of a Tree in a generic way" in {
+      Tree.map(Leaf(123))((i: Int) => i * i) should equalTo(Leaf(15129))
+      Tree.map(Branch(Leaf(123), Leaf(321)))((i: Int) => i.toString) should equalTo(Branch(Leaf("123"), Leaf("321")))
+    }
   }
 }

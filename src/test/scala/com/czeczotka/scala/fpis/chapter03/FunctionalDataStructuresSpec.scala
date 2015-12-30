@@ -210,5 +210,11 @@ class FunctionalDataStructuresSpec extends Specification {
       Tree.max(Branch(Leaf(123), Leaf(321))) should equalTo(321)
       Tree.max(Branch(Branch(Leaf(-5), Leaf(-1)), Branch(Leaf(7), Leaf(3)))) should equalTo(7)
     }
+
+    "exercise 3.27: `depth` returns the maximum path length from the root of a Tree to any leaf" in {
+      Tree.depth(Leaf(123)) should equalTo(1)
+      Tree.depth(Branch(Leaf(123), Leaf(321))) should equalTo(2)
+      Tree.depth(Branch(Branch(Leaf(-5), Leaf(-1)), Branch(Leaf(7), Leaf(3)))) should equalTo(3)
+    }
   }
 }

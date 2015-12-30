@@ -204,5 +204,11 @@ class FunctionalDataStructuresSpec extends Specification {
       Tree.size(Branch(Branch(Leaf("a"), Leaf("b")), Leaf("c"))) should equalTo(5)
       Tree.size(Branch(Branch(Leaf("a"), Leaf("b")), Branch(Leaf("c"), Leaf("d")))) should equalTo(7)
     }
+
+    "exercise 3.26: `max` returns the maximum element in a Tree" in {
+      Tree.max(Leaf(123)) should equalTo(123)
+      Tree.max(Branch(Leaf(123), Leaf(321))) should equalTo(321)
+      Tree.max(Branch(Branch(Leaf(-5), Leaf(-1)), Branch(Leaf(7), Leaf(3)))) should equalTo(7)
+    }
   }
 }

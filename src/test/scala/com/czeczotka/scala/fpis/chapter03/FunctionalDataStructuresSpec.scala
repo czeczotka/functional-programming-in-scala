@@ -221,5 +221,40 @@ class FunctionalDataStructuresSpec extends Specification {
       Tree.map(Leaf(123))((i: Int) => i * i) should equalTo(Leaf(15129))
       Tree.map(Branch(Leaf(123), Leaf(321)))((i: Int) => i.toString) should equalTo(Branch(Leaf("123"), Leaf("321")))
     }
+
+    "exercise 3.29: `fold` should enable passing a function to process a Tree" in {
+      Tree.fold(Leaf(123))(identity)((a: Int, b: Int) => a + b) shouldEqual 123
+      Tree.fold(Leaf(123))((i: Int) => i.toDouble)((a, b) => a + b) shouldEqual 123.0
+      Tree.fold(Leaf("abc"))(_.length)((a, b: Int) => a + b) shouldEqual 3
+      Tree.fold(Branch(Branch(Leaf("a"), Leaf("ab")), Branch(Leaf("cd"), Leaf("efg"))))(_.length)((a, b) => a + b) shouldEqual 8
+      Tree.fold(Leaf("abc"))(identity)((a, b) => a + b) shouldEqual "abc"
+      Tree.fold(Leaf(1))(_.toString)((a, b) => a + b) shouldEqual "1"
+      Tree.fold(Branch(Leaf("a"), Leaf("b")))(identity)((a, b) => a + b) shouldEqual "ab"
+      Tree.fold(Branch(Leaf(1), Leaf(2)))(_.toString)((a, b) => a + b) shouldEqual "12"
+      Tree.fold(Branch(Branch(Leaf("a"), Leaf("b")), Branch(Leaf("c"), Leaf("d"))))(identity)(_ + _) shouldEqual "abcd"
+    }
+
+    "exercise 3.29: `sizeFold` should count the number of nodes in a Tree using fold" in {
+      Tree.sizeFold(Leaf("a")) shouldEqual 1
+      Tree.sizeFold(Branch(Branch(Leaf("a"), Leaf("b")), Branch(Leaf("c"), Leaf("d")))) shouldEqual 7
+    }
+
+    "exercise 3.29: `maxFold` should return the maximum element in a Tree using fold" in {
+      Tree.maxFold(Leaf(123)) shouldEqual 123
+      Tree.maxFold(Branch(Branch(Leaf(-5), Leaf(-1)), Branch(Leaf(7), Leaf(3)))) shouldEqual 7
+    }
+
+    "exercise 3.29: `depthFold` should return the maximum path length from the root of a Tree to any leaf using fold" in {
+      Tree.depthFold(Leaf(123)) shouldEqual 1
+      Tree.depthFold(Branch(Leaf(123), Leaf(321))) shouldEqual 2
+      Tree.depthFold(Branch(Branch(Leaf(-5), Leaf(-1)), Branch(Leaf(7), Leaf(3)))) shouldEqual 3
+      Tree.depthFold(Branch(Branch(Leaf(-5), Leaf(-1)), Leaf(3))) shouldEqual 3
+      Tree.depthFold(Branch(Leaf(-1), Branch(Leaf(7), Leaf(3)))) shouldEqual 3
+    }
+
+    "exercise 3.29: `mapFold` should modify each element of a Tree in a generic way using fold" in {
+      Tree.mapFold(Leaf(123))((i: Int) => i * i) should equalTo(Leaf(15129))
+      Tree.mapFold(Branch(Leaf(123), Leaf(321)))((i: Int) => i.toString) should equalTo(Branch(Leaf("123"), Leaf("321")))
+    }
   }
 }

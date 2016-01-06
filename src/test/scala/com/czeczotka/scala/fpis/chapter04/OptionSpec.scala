@@ -28,5 +28,12 @@ class OptionSpec extends Specification {
       Some(2).getOrElse(1) shouldEqual 2
       Some("abc").getOrElse("") shouldEqual "abc"
     }
+
+    "exercise 4.1: `orElse` function returns the Option if defined, or the given default value otherwise" in {
+      (None:Option[Int]).orElse(Some(0)) shouldEqual Some(0)
+      (None:Option[String]).getOrElse(Some("")) shouldEqual Some("")
+      Some(2).orElse(Some(1)) shouldEqual Some(2)
+      Some("abc").orElse(Some("")) shouldEqual Some("abc")
+    }
   }
 }

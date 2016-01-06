@@ -35,5 +35,12 @@ class OptionSpec extends Specification {
       Some(2).orElse(Some(1)) shouldEqual Some(2)
       Some("abc").orElse(Some("")) shouldEqual Some("abc")
     }
+
+    "exercise 4.1: `filter` function should convert Some to None if the value doesn't satisfy the predicate" in {
+      (None:Option[Int]).filter(_ > 0) shouldEqual None
+      Some(0).filter(_ > 0) shouldEqual None
+      Some(2).filter(_ > 0) shouldEqual Some(2)
+      Some("abc").filter(!_.isEmpty) shouldEqual Some("abc")
+    }
   }
 }

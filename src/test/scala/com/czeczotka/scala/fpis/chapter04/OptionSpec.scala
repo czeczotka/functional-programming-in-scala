@@ -21,5 +21,12 @@ class OptionSpec extends Specification {
       Some(-2).flatMap((i: Int) => if (i >=  0) Some(Math.sqrt(i)) else None) shouldEqual None
       Some(16).flatMap((i: Int) => if (i >=  0) Some(Math.sqrt(i)) else None) shouldEqual Some(4)
     }
+
+    "exercise 4.1: `getOrElse` function returns the result inside the Option if defined, or the given default value otherwise" in {
+      (None:Option[Int]).getOrElse(0) shouldEqual 0
+      (None:Option[String]).getOrElse("") shouldEqual ""
+      Some(2).getOrElse(1) shouldEqual 2
+      Some("abc").getOrElse("") shouldEqual "abc"
+    }
   }
 }

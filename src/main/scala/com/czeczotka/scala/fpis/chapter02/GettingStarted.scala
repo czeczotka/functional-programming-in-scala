@@ -62,7 +62,7 @@ object GettingStarted {
 
 class GettingStarted {
 
-  def compose[A,B,C](f: B => C, g: A=> B): A => C =
+  def compose[A,B,C](f: B => C, g: A => B): A => C =
     (a: A) => f(g(a))
 
   def uncurry[A,B,C](f: A => B => C): (A, B) => C =
@@ -99,9 +99,7 @@ class GettingStarted {
       if (counter >= num) minusOne + minusTwo
       else go(counter + 1, minusOne + minusTwo, minusOne)
     }
-    num match {
-      case _ if num > 0 => go(2, 1, 0)
-      case _ => 0
-    }
+    if (num > 0) go(2, 1, 0)
+    else 0
   }
 }

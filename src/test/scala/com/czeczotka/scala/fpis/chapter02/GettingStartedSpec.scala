@@ -17,7 +17,9 @@ class GettingStartedSpec extends Specification {def is = s2"""
    fibonacci(1)  =  1             ${gs.fibonacci(1)  must be equalTo 1}
    fibonacci(2)  =  1             ${gs.fibonacci(2)  must be equalTo 1}
    fibonacci(3)  =  2             ${gs.fibonacci(3)  must be equalTo 2}
+   fibonacci(4)  =  3             ${gs.fibonacci(4)  must be equalTo 3}
    fibonacci(5)  =  5             ${gs.fibonacci(5)  must be equalTo 5}
+   fibonacci(6)  =  8             ${gs.fibonacci(6)  must be equalTo 8}
    fibonacci(7)  =  13            ${gs.fibonacci(7)  must be equalTo 13}
 
  Function 'isSorted' should return
